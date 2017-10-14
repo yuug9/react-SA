@@ -64,7 +64,6 @@ renderToolbar: function(route, navigator) {
     );
   },
 
-
   renderPage: function(route, navigator) {
     
     if(page == true && page2 == true){
@@ -87,10 +86,15 @@ renderToolbar: function(route, navigator) {
               onChange={this.handleDateChange}
               modifier='date'
               float
-              placeholder='เช่น: 01/01/2560' />
+              placeholder='เช่น: 01-01-2560' />
           </p>
-          <Ons.Select id="choose-sel" value={this.state.modifier} modifier={this.state.modifier} onChange={this.editSelects}>
-            
+          <p>
+          <Ons.ListHeader>เวลา: </Ons.ListHeader>
+          <Ons.Select id="choose-sel" 
+              value={this.state.modifier} 
+              placeholder="เลือกเวลา"
+              modifier={this.state.modifier} 
+              onChange={this.editSelects}>
             <option value="10:00-11:00">10:00-11:00</option>
             <option value="11:00-12:00">11:00-12:00</option>
             <option value="12:00-13:00">12:00-13:00</option>
@@ -103,8 +107,8 @@ renderToolbar: function(route, navigator) {
             <option value="19:00-20:00">19:00-20:00</option>
             <option value="20:00-21:00">20:00-21:00</option>
             <option value="21:00-22:00">21:00-22:00</option>
-            
           </Ons.Select>
+          </p>
           </section>
            <Ons.List
              dataSource={this.state.vegetables}
@@ -150,11 +154,11 @@ renderToolbar: function(route, navigator) {
         );
       }    
    }else 
-    var a = this.state.selectedVegetable
-    var b = this.state.selectedVegetable2
-    var c = this.state.selectedVegetable3
+    var a = this.state.selectedVegetable //ประเภทเทรนเนอร์
+    var b = this.state.selectedVegetable2  // ชื่อเทรนเนอร์
+    var c = this.state.selectedVegetable3 // ชื่อเทรนเนอร์
     var d = this.state.date
-    var e = this.state.modifier
+    var e = this.state.modifier    //time
     var g = this.state.username
         return (
       <Ons.Page key={route.title} renderToolbar={this.renderToolbar.bind(this, route, navigator)}>
@@ -178,12 +182,12 @@ renderToolbar: function(route, navigator) {
           </section>
         
         <p style={{textAlign: 'center'}}>
-          <Ons.Button onClick={this.handleClick.bind(this, navigator)}>ยืนยัน</Ons.Button>
+          <Ons.Button onClick={this.handleOnClick}>ยืนยัน</Ons.Button>&nbsp;&nbsp;
+          <Ons.Button onClick={this.handleClick.bind(this, navigator)}>กลับหน้าหลัก</Ons.Button>
         </p>
       </Ons.Page>
         );
   },
-  
   renderCheckboxRow(row,c) {
     return (
       <Ons.ListItem key={row} tappable>
@@ -251,7 +255,28 @@ renderToolbar: function(route, navigator) {
 
     );
   },
-  
+  handleOnClick:function(){
+    // "/name/{name}/date/{date}/time/{time}/type/{typeTraniner}/trainer/{traninerName}"
+    var typeTraniner = this.state.selectedVegetable //ประเภทเทรนเนอร์
+    var b = this.state.selectedVegetable2  // ชื่อเทรนเนอร์
+    var c = this.state.selectedVegetable3 // ชื่อเทรนเนอร์
+    var date = this.state.date
+    var time = this.state.modifier    //time
+    var name = this.state.username
+    let traninerName = b||c
+    date  = date.toString();
+    time = time.toString();
+    // const { name,school } = this.state
+    // ons.notification.alert(this.state.title);
+  if(name&&traninerName){
+    client({method: 'GET', path: '/name/'+name+'/date/'+date+'/time/'+time+'/type/'+typeTraniner+'/trainer/'+traninerName}).done(
+       ons.notification.alert('Saveed!'),
+      // this.setState({name:' ',school:' '})
+      )
+    }else{
+       ons.notification.alert('No data')
+    }
+},
   handleUsernameChange(e) {
     this.setState({username: e.target.value});
   },

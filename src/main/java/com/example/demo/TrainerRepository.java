@@ -1,9 +1,6 @@
 package com.example.demo;
-
-
 import org.springframework.data.repository.CrudRepository;
-
-
-    public interface TrainerRepository extends CrudRepository<Trainer, Long> {
-    }
-
+import java.util.List;
+public interface TrainerRepository extends CrudRepository<Trainer, Long> {
+    
+}

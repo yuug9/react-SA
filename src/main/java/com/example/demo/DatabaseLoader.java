@@ -16,9 +16,6 @@ public class DatabaseLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-		this.trainerRepository.save(new Trainer("ฟุตบอล"));
-		this.trainerRepository.save(new Trainer("บาสเกตบอล"));
-
-
+		this.trainerRepository.save(new Trainer("สมพร","10/10/17","13:00-15.00","ฟุตบอล","เเมสชี"));
 	}
 }
