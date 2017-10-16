@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class ChooseTrainer {
+public class TrainerBook {
 
 	private @Id @GeneratedValue Long id;
 	private String name;
@@ -17,9 +17,9 @@ public class ChooseTrainer {
     private String typeTraniner;
     private String traninerName;
 
-	private ChooseTrainer() {}
+	private TrainerBook() {}
 
-	public ChooseTrainer(String name, String date,String time, String typeTraniner, String traninerName) {
+	public TrainerBook(String name, String date,String time, String typeTraniner, String traninerName) {
 		this.name = name;
 		this.date = date;
         this.time = time;
