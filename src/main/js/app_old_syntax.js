@@ -255,7 +255,7 @@ renderToolbar: function(route, navigator) {
 
     );
   },
-  handleOnClick:function(){
+  handleOnClick:function(navigator){
     // "/name/{name}/date/{date}/time/{time}/type/{typeTraniner}/trainer/{traninerName}"
     var typeTraniner = this.state.selectedVegetable //ประเภทเทรนเนอร์
     var b = this.state.selectedVegetable2  // ชื่อเทรนเนอร์
@@ -273,6 +273,7 @@ renderToolbar: function(route, navigator) {
        ons.notification.alert('Saveed!'),
       // this.setState({name:' ',school:' '})
       )
+      this.handleClick.bind(this, navigator);
     }else{
        ons.notification.alert('No data')
     }
